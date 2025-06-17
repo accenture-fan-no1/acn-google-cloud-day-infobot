@@ -1,291 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Enhanced Dialogflow Messenger</title>
-    <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
-    <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Enhanced Dialogflow Messenger</title>
+  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css" />
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
 </head>
 <body>
-    <!-- Custom overlay for logo and suggestions -->
-    <div id="custom-overlay">
-        <div id="logo-container">
-            <img src="Accenture-Logo.png" alt="Accenture Logo" id="chat-logo">
-            <span id="logo-text">Accenture InfoBot</span>
-        </div>
-
-        <!-- SUGGESTIONS CENTERED -->
-        <div id="suggestions-modal">
-            <div id="suggestions-title">Welcome, here are some example questions:</div>
-            <div id="suggestions-container">
-                <div class="suggestion-chip" onclick="sendSuggestion('What services do you offer?')">
-                    What services do you offer?
-                </div>
-                <div class="suggestion-chip" onclick="sendSuggestion('Tell me about Accentures technological vision for 2025')">
-                    Tell me about Accentures technological vision?
-                </div>
-                <div class="suggestion-chip" onclick="sendSuggestion('What are Accentures goals for 2025')">
-                    What are Accentures goals for the future?
-                </div>
-                <div class="suggestion-chip" onclick="sendSuggestion('changetolinkedin_links')">
-                    I have no job i am a broke boy.
-                </div>
-            </div>
-        </div>
+  <!-- Custom overlay for logo and suggestions -->
+  <div id="custom-overlay">
+    <div id="logo-container">
+      <img src="Accenture-Logo.png" alt="Accenture Logo" id="chat-logo" />
+      <span id="logo-text">Accenture InfoBot</span>
+      <button id="toggle-suggestions-btn" onclick="toggleSuggestions()">−</button>
     </div>
 
-    <df-messenger
-        project-id="acn-cloud-solution-factory"
-        agent-id="4e8f264b-692a-4a72-a7b5-a817dbbb2ba7"
-        language-code="en"
-        max-query-length="-1">
-        <df-messenger-chat chat-title="Accenture_infobot"></df-messenger-chat>
-    </df-messenger>
+    <!-- SUGGESTIONS CENTERED -->
+    <div id="suggestions-modal">
+      <div id="suggestions-title">Welcome, here are some example questions:</div>
+      <div id="suggestions-container">
+        <div class="suggestion-chip" onclick="sendSuggestion('What services do you offer?')">
+          What services do you offer?
+        </div>
+        <div class="suggestion-chip" onclick="sendSuggestion('Tell me about Accentures technological vision for 2025')">
+          Tell me about Accentures technological vision?
+        </div>
+        <div class="suggestion-chip" onclick="sendSuggestion('What are Accentures goals for 2025')">
+          What are Accentures goals for the future?
+        </div>
+        <div class="suggestion-chip" onclick="sendSuggestion('changetolinkedin_links')">
+          I have no job i am a broke boy.
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', 'Google Sans', Arial, sans-serif;
-            height: 100vh;
-            overflow: hidden;
+  <df-messenger
+    project-id="acn-cloud-solution-factory"
+    agent-id="4e8f264b-692a-4a72-a7b5-a817dbbb2ba7"
+    language-code="en"
+    max-query-length="-1">
+    <df-messenger-chat chat-title="Accenture_infobot"></df-messenger-chat>
+  </df-messenger>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', 'Google Sans', Arial, sans-serif;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #custom-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10000;
+    }
+
+    #logo-container {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      pointer-events: auto;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 8px 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(138, 79, 255, 0.1);
+      border: 1px solid rgba(138, 79, 255, 0.1);
+    }
+
+    #chat-logo {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      max-width: 100px;
+      max-height: 48px;
+    }
+
+    #logo-text {
+      font-weight: 600;
+      color: #3d2864;
+      font-size: 1.1rem;
+    }
+
+    #toggle-suggestions-btn {
+      font-size: 1.4rem;
+      font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #3d2864;
+      padding: 0 8px;
+      pointer-events: auto;
+      transition: transform 0.2s ease;
+    }
+
+    #toggle-suggestions-btn:hover {
+      transform: scale(1.1);
+    }
+
+    #suggestions-modal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      background: rgba(255,255,255,0.98);
+      box-shadow: 0 4px 24px rgba(138, 79, 255, 0.09);
+      border-radius: 18px;
+      padding: 32px 28px 24px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: auto;
+      min-width: 300px;
+      max-width: 95vw;
+      transition: opacity 0.5s, visibility 0.5s;
+      z-index: 10100;
+    }
+
+    #suggestions-modal.hidden {
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    #suggestions-title {
+      font-size: 1.16rem;
+      font-weight: 600;
+      color: #3d2864;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    #suggestions-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .suggestion-chip {
+      background: #fff;
+      border: 1.5px solid #e0d7fa;
+      border-radius: 20px;
+      padding: 10px 18px;
+      font-size: 0.98rem;
+      color: #3d2864;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(138, 79, 255, 0.1);
+      font-weight: 500;
+      user-select: none;
+    }
+
+    .suggestion-chip:hover {
+      background: #8a4fff;
+      color: #fff;
+      border-color: #8a4fff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(138, 79, 255, 0.22);
+    }
+
+    .suggestion-chip:active {
+      transform: translateY(0);
+    }
+
+    df-messenger {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: 9999 !important;
+      --df-messenger-chat-background: #faf8ff;
+      --df-messenger-message-user-background: #8a4fff;
+      --df-messenger-message-bot-background: #fff;
+      --df-messenger-font-color: #232046;
+      --df-messenger-input-box-background: #fff;
+      --df-messenger-input-box-border: #e0d7fa;
+      --df-messenger-input-box-focus-border: #8a4fff;
+      --df-messenger-font-family: 'Inter', 'Google Sans', Arial, sans-serif;
+      padding-bottom: 72px !important;
+      box-sizing: border-box !important;
+    }
+
+    @media (max-width: 600px) {
+      #logo-container {
+        top: 10px;
+        left: 10px;
+        padding: 6px 12px;
+      }
+
+      #suggestions-modal {
+        padding: 16px 6vw 12px 6vw;
+        min-width: 0;
+        max-width: 100vw;
+        font-size: 15px;
+      }
+
+      #suggestions-title {
+        font-size: 1rem;
+      }
+
+      .suggestion-chip {
+        font-size: 0.89rem;
+        padding: 8px 12px;
+      }
+    }
+
+    @media (min-width: 800px) {
+      #logo-container {
+        position: fixed;
+        top: 4px;
+        left: 4px;
+        max-width: 350px;
+        min-width: 180px;
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(138, 79, 255, 0.13);
+        border: 1.5px solid rgba(138, 79, 255, 0.13);
+        z-index: 10101;
+        background: rgba(255,255,255,0.97);
+      }
+
+      #logo-container #logo-text {
+        font-size: 1.17rem;
+      }
+    }
+  </style>
+
+  <script>
+    let suggestionsDismissed = false;
+    let suggestionsVisible = true;
+
+    function hideSuggestionsModal() {
+      const modal = document.getElementById('suggestions-modal');
+      const toggleBtn = document.getElementById('toggle-suggestions-btn');
+      if (modal && toggleBtn) {
+        modal.classList.add('hidden');
+        toggleBtn.textContent = '+';
+        suggestionsVisible = false;
+      }
+    }
+
+    function showSuggestionsModal() {
+      const modal = document.getElementById('suggestions-modal');
+      const toggleBtn = document.getElementById('toggle-suggestions-btn');
+      if (modal && toggleBtn) {
+        modal.classList.remove('hidden');
+        toggleBtn.textContent = '−';
+        suggestionsVisible = true;
+      }
+    }
+
+    function toggleSuggestions() {
+      if (suggestionsVisible) {
+        hideSuggestionsModal();
+      } else {
+        showSuggestionsModal();
+      }
+    }
+
+    function sendSuggestion(message) {
+      const dfMessenger = document.querySelector('df-messenger');
+      function attemptSend() {
+        if (typeof dfMessenger.sendQuery === 'function') {
+          dfMessenger.sendQuery(message);
+          hideSuggestionsModal();
+          suggestionsDismissed = true;
+        } else {
+          setTimeout(attemptSend, 100);
         }
-        
-        /* Custom overlay for additional elements */
-        #custom-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10000;
+      }
+      attemptSend();
+    }
+
+    function setViewportHeight() {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      const dfMessenger = document.querySelector('df-messenger');
+      if (dfMessenger) {
+        dfMessenger.style.height = `${window.innerHeight}px`;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('suggestions-modal');
+      if (modal) modal.style.transition = 'opacity 0.5s, visibility 0.5s';
+
+      setViewportHeight();
+      window.addEventListener('resize', setViewportHeight);
+      window.addEventListener('orientationchange', () => {
+        setTimeout(setViewportHeight, 100);
+      });
+
+      const dfMessenger = document.querySelector('df-messenger');
+      dfMessenger.addEventListener('df-request-sent', function handler(e) {
+        if (!suggestionsDismissed) {
+          hideSuggestionsModal();
+          suggestionsDismissed = true;
         }
-
-        #logo-container {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            pointer-events: auto;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 8px 16px;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(138, 79, 255, 0.1);
-            border: 1px solid rgba(138, 79, 255, 0.1);
-        }
-
-        #chat-logo {
-            height: 40px;
-            width: auto;
-            border-radius: 0;
-            object-fit: contain;
-            background: none;
-            display: block;
-            max-width: 100px;
-            max-height: 48px;
-        }
-
-        #logo-text {
-            font-weight: 600;
-            color: #3d2864;
-            font-size: 1.1rem;
-        }
-
-        /* Suggestions Modal in center */
-        #suggestions-modal {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -60%);
-            background: rgba(255,255,255,0.98);
-            box-shadow: 0 4px 24px rgba(138, 79, 255, 0.09);
-            border-radius: 18px;
-            padding: 32px 28px 24px 28px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            pointer-events: auto;
-            min-width: 300px;
-            max-width: 95vw;
-            transition: opacity 0.5s, visibility 0.5s;
-            z-index: 10100;
-        }
-
-        #suggestions-modal.hidden {
-            opacity: 0;
-            pointer-events: none;
-            visibility: hidden;
-        }
-
-        #suggestions-title {
-            font-size: 1.16rem;
-            font-weight: 600;
-            color: #3d2864;
-            margin-bottom: 18px;
-            text-align: center;
-        }
-
-        #suggestions-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-        }
-
-        .suggestion-chip {
-            background: #fff;
-            border: 1.5px solid #e0d7fa;
-            border-radius: 20px;
-            padding: 10px 18px;
-            font-size: 0.98rem;
-            color: #3d2864;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 8px rgba(138, 79, 255, 0.1);
-            font-weight: 500;
-            user-select: none;
-        }
-
-        .suggestion-chip:hover {
-            background: #8a4fff;
-            color: #fff;
-            border-color: #8a4fff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(138, 79, 255, 0.22);
-        }
-
-        .suggestion-chip:active {
-            transform: translateY(0);
-        }
-
-        df-messenger {
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            z-index: 9999 !important;
-            --df-messenger-chat-background: #faf8ff;
-            --df-messenger-message-user-background: #8a4fff;
-            --df-messenger-message-bot-background: #fff;
-            --df-messenger-font-color: #232046;
-            --df-messenger-input-box-background: #fff;
-            --df-messenger-input-box-border: #e0d7fa;
-            --df-messenger-input-box-focus-border: #8a4fff;
-            --df-messenger-font-family: 'Inter', 'Google Sans', Arial, sans-serif;
-            padding-bottom: 72px !important;  /* Add enough bottom padding for the input bar to breathe */
-            box-sizing: border-box !important;
-        }
-
-        /* Mobile-specific adjustments */
-        @media (max-width: 600px) {
-            #logo-container {
-                top: 10px;
-                left: 10px;
-                padding: 6px 12px;
-            }
-            
-            #suggestions-modal {
-                padding: 16px 6vw 12px 6vw;
-                min-width: 0;
-                max-width: 100vw;
-                font-size: 15px;
-            }
-            
-            #suggestions-title {
-                font-size: 1rem;
-            }
-            
-            .suggestion-chip {
-                font-size: 0.89rem;
-                padding: 8px 12px;
-            }
-        }
-
-        @media (min-width: 800px) {
-            #logo-container {
-                position: fixed;
-                top: 4px;
-                left: 4px;
-                max-width: 350px;
-                min-width: 180px;
-                border-radius: 18px;
-                box-shadow: 0 4px 24px rgba(138, 79, 255, 0.13);
-                border: 1.5px solid rgba(138, 79, 255, 0.13);
-                z-index: 10101;
-                background: rgba(255,255,255,0.97);
-            }
-            
-            #logo-container #logo-text {
-                font-size: 1.17rem;
-            }
-        }
-    </style>
-
-    <script>
-        // Hide suggestions modal (centered welcome/examples) after first user message (typed OR suggestion)
-        let suggestionsDismissed = false;
-
-        function hideSuggestionsModal() {
-            if (!suggestionsDismissed) {
-                suggestionsDismissed = true;
-                const modal = document.getElementById('suggestions-modal');
-                if (modal) modal.classList.add('hidden');
-            }
-        }
-
-        function sendSuggestion(message) {
-            const dfMessenger = document.querySelector('df-messenger');
-            function attemptSend() {
-                if (typeof dfMessenger.sendQuery === 'function') {
-                    dfMessenger.sendQuery(message);
-                    hideSuggestionsModal();
-                } else {
-                    setTimeout(attemptSend, 100);
-                }
-            }
-            attemptSend();
-        }
-
-        // Mobile viewport height adjustment
-        function setViewportHeight() {
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-            
-            // Force df-messenger to use actual viewport height
-            const dfMessenger = document.querySelector('df-messenger');
-            if (dfMessenger) {
-                dfMessenger.style.height = `${window.innerHeight}px`;
-            }
-        }
-
-        // Listen for first user message sent by typing, not just clicking a chip
-        document.addEventListener('DOMContentLoaded', () => {
-            // Setup fade/transition
-            const modal = document.getElementById('suggestions-modal');
-            if (modal) modal.style.transition = 'opacity 0.5s, visibility 0.5s';
-
-            // Update viewport height on load and resize
-            setViewportHeight();
-            window.addEventListener('resize', setViewportHeight);
-            window.addEventListener('orientationchange', () => {
-                setTimeout(setViewportHeight, 100);
-            });
-
-            // Listen for a message sent by user typing (in addition to chip clicks)
-            const dfMessenger = document.querySelector('df-messenger');
-            // df-messenger fires a "df-request-sent" event for every outgoing user query
-            dfMessenger.addEventListener('df-request-sent', function handler(e) {
-                hideSuggestionsModal();
-                // Remove this event handler after the first message
-                dfMessenger.removeEventListener('df-request-sent', handler);
-            });
-        });
-    </script>
+        dfMessenger.removeEventListener('df-request-sent', handler);
+      });
+    });
+  </script>
 </body>
 </html>
