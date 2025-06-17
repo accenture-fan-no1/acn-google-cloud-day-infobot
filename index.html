@@ -13,6 +13,7 @@
     <div id="logo-container">
       <img src="Accenture-Logo.png" alt="Accenture Logo" id="chat-logo" />
       <span id="logo-text">Accenture InfoBot</span>
+      <div class="spacer"></div>
       <div id="toggle-btn-wrapper">
         <button id="toggle-suggestions-btn" onclick="toggleSuggestions()">−</button>
       </div>
@@ -71,14 +72,16 @@
       left: 20px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      pointer-events: auto;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
       padding: 8px 16px;
       border-radius: 12px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
       box-shadow: 0 4px 16px rgba(138, 79, 255, 0.1);
       border: 1px solid rgba(138, 79, 255, 0.1);
+      min-width: 280px;
+      max-width: 90vw;
+      pointer-events: auto;
+      gap: 12px;
     }
 
     #chat-logo {
@@ -93,14 +96,19 @@
       font-weight: 600;
       color: #3d2864;
       font-size: 1.1rem;
+      white-space: nowrap;
+    }
+
+    .spacer {
+      flex: 1;
     }
 
     #toggle-btn-wrapper {
-      margin-left: auto;
-      pointer-events: auto;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-left: 8px;
+      pointer-events: auto;
     }
 
     #toggle-suggestions-btn {
@@ -112,7 +120,6 @@
       cursor: pointer;
       color: #3d2864;
       padding: 4px 12px;
-      pointer-events: auto;
       transition: transform 0.2s ease, background 0.3s;
     }
 
