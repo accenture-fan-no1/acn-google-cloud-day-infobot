@@ -13,7 +13,9 @@
     <div id="logo-container">
       <img src="Accenture-Logo.png" alt="Accenture Logo" id="chat-logo" />
       <span id="logo-text">Accenture InfoBot</span>
-      <button id="toggle-suggestions-btn" onclick="toggleSuggestions()">−</button>
+      <div id="toggle-btn-wrapper">
+        <button id="toggle-suggestions-btn" onclick="toggleSuggestions()">−</button>
+      </div>
     </div>
 
     <!-- SUGGESTIONS CENTERED -->
@@ -93,20 +95,31 @@
       font-size: 1.1rem;
     }
 
+    #toggle-btn-wrapper {
+      margin-left: auto;
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     #toggle-suggestions-btn {
       font-size: 1.4rem;
       font-weight: bold;
-      background: none;
-      border: none;
+      background: #f1ebff;
+      border: 1px solid #8a4fff;
+      border-radius: 8px;
       cursor: pointer;
       color: #3d2864;
-      padding: 0 8px;
+      padding: 4px 12px;
       pointer-events: auto;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, background 0.3s;
     }
 
     #toggle-suggestions-btn:hover {
       transform: scale(1.1);
+      background: #8a4fff;
+      color: white;
     }
 
     #suggestions-modal {
