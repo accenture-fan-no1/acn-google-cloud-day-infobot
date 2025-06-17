@@ -13,10 +13,6 @@
     <div id="logo-container">
       <img src="Accenture-Logo.png" alt="Accenture Logo" id="chat-logo" />
       <span id="logo-text">Accenture InfoBot</span>
-      <div class="spacer"></div>
-      <div id="toggle-btn-wrapper">
-        <button id="toggle-suggestions-btn" onclick="toggleSuggestions()">−</button>
-      </div>
     </div>
 
     <!-- SUGGESTIONS CENTERED -->
@@ -37,6 +33,11 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- 🟡 Floating Suggestions Toggle Button -->
+  <div id="floating-toggle">
+    <button id="toggle-suggestions-btn" onclick="toggleSuggestions()">−</button>
   </div>
 
   <df-messenger
@@ -78,8 +79,6 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 4px 16px rgba(138, 79, 255, 0.1);
       border: 1px solid rgba(138, 79, 255, 0.1);
-      min-width: 280px;
-      max-width: 90vw;
       pointer-events: auto;
       gap: 12px;
     }
@@ -99,34 +98,33 @@
       white-space: nowrap;
     }
 
-    .spacer {
-      flex: 1;
-    }
-
-    #toggle-btn-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 8px;
+    /* 🟡 Floating Button Container */
+    #floating-toggle {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 10102;
       pointer-events: auto;
     }
 
+    /* 🟡 Round Button Style */
     #toggle-suggestions-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background-color: #ffeb7f;
+      color: #3d2864;
       font-size: 1.4rem;
       font-weight: bold;
-      background: #f1ebff;
-      border: 1px solid #8a4fff;
-      border-radius: 8px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       cursor: pointer;
-      color: #3d2864;
-      padding: 4px 12px;
-      transition: transform 0.2s ease, background 0.3s;
+      transition: background 0.3s, transform 0.2s;
     }
 
     #toggle-suggestions-btn:hover {
+      background-color: #ffe15c;
       transform: scale(1.1);
-      background: #8a4fff;
-      color: white;
     }
 
     #suggestions-modal {
@@ -219,6 +217,11 @@
         top: 10px;
         left: 10px;
         padding: 6px 12px;
+      }
+
+      #floating-toggle {
+        top: 10px;
+        right: 10px;
       }
 
       #suggestions-modal {
