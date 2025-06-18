@@ -319,6 +319,9 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('suggestions-modal');
+      if (modal) modal.style.transition = 'opacity 0.5s, visibility 0.5s, transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+      
       setViewportHeight();
       window.addEventListener('resize', setViewportHeight);
       window.addEventListener('orientationchange', () => {
