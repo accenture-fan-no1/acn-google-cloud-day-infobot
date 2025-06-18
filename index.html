@@ -68,7 +68,7 @@
     }
 
     #logo-container {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 20px;
       display: flex;
@@ -81,6 +81,7 @@
       border: 1px solid rgba(138, 79, 255, 0.1);
       pointer-events: auto;
       gap: 12px;
+      z-index: 10101;
     }
 
     #chat-logo {
@@ -98,7 +99,6 @@
       white-space: nowrap;
     }
 
-    /* 🟡 Floating Button Container */
     #floating-toggle {
       position: fixed;
       top: 16px;
@@ -107,7 +107,6 @@
       pointer-events: auto;
     }
 
-    /* 🟡 Round Button Style */
     #toggle-suggestions-btn {
       width: 42px;
       height: 42px;
@@ -128,13 +127,10 @@
     }
 
     #suggestions-modal {
-      position: absolute;
-      top: -10%;
+      position: fixed;
+      top: 50%;
       left: 50%;
-      /* Change transform-origin to top right */
-      transform-origin: top right;
-      /* Start at center, but animate from top right */
-      transform: translate(-50%, 60%);
+      transform: translate(-50%, -50%);
       background: rgba(255,255,255,0.98);
       box-shadow: 0 4px 24px rgba(138, 79, 255, 0.09);
       border-radius: 18px;
@@ -155,8 +151,7 @@
       opacity: 0;
       pointer-events: none;
       visibility: hidden;
-      /* Animate towards top right and shrink */
-      transform: translate(-24px, 0px) scale(0.1);
+      transform: translate(-50%, -50%) scale(0.1);
     }
 
     #suggestions-title {
@@ -324,9 +319,6 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      const modal = document.getElementById('suggestions-modal');
-      if (modal) modal.style.transition = 'opacity 0.5s, visibility 0.5s, transform 0.5s cubic-bezier(0.4,0,0.2,1)';
-
       setViewportHeight();
       window.addEventListener('resize', setViewportHeight);
       window.addEventListener('orientationchange', () => {
