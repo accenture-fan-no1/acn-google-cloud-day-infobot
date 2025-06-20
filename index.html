@@ -299,6 +299,7 @@
       const dfMessenger = document.querySelector('df-messenger');
       function attemptSend() {
         if (typeof dfMessenger.sendQuery === 'function') {
+          dfMessenger.renderCustomText(message, false);
           dfMessenger.sendQuery(message);
           hideSuggestionsModal();
           suggestionsDismissed = true;
