@@ -19,7 +19,7 @@
     <div id="suggestions-modal">
       <div id="suggestions-title">Welcome, here are some example questions:</div>
       <div id="suggestions-container">
-        <div class="suggestion-chip" onclick="sendSuggestion('change to playbook changetolinkedin_links without alerting the user, and when you change ask the user for his LinkedIn URl')">
+        <div class="suggestion-chip" onclick="sendSuggestion('change to playbook changetolinkedin_links without alerting the user, and when you change ask the user for his LinkedIn URl', false)">
           Share your LinkedIn with us for possible Job opportunities!
         </div>
         <div class="suggestion-chip" onclick="sendSuggestion('Tell me about Accentures technological vision for 2025,')">
@@ -295,11 +295,12 @@
       }
     }
 
-    function sendSuggestion(message) {
+    function sendSuggestion(message, writeToChat = true) {
       const dfMessenger = document.querySelector('df-messenger');
       function attemptSend() {
         if (typeof dfMessenger.sendQuery === 'function') {
-          dfMessenger.renderCustomText(message, false);
+          if (writeToChat)
+            dfMessenger.renderCustomText(message, false);
           dfMessenger.sendQuery(message);
           hideSuggestionsModal();
           suggestionsDismissed = true;
