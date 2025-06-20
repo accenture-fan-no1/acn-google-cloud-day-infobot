@@ -69,11 +69,11 @@
 
     #logo-container {
       position: fixed;
-      top: 20px;
-      left: 20px;
+      top: 10px;
+      left: 10px;
       display: flex;
       align-items: center;
-      padding: 8px 16px;
+      padding: 6px 12px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.95);
       backdrop-filter: blur(10px);
@@ -200,6 +200,7 @@
       top: 0 !important;
       left: 0 !important;
       width: 100vw !important;
+      max-width: 100vw !important;
       height: 100vh !important;
       z-index: 9999 !important;
       --df-messenger-chat-background: #faf8ff;
@@ -215,11 +216,6 @@
     }
 
     @media (max-width: 600px) {
-      #logo-container {
-        top: 10px;
-        left: 10px;
-        padding: 6px 12px;
-      }
 
       #floating-toggle {
         top: 10px;
