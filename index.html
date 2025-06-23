@@ -313,36 +313,10 @@
       }
     }
 
-    function replayPreviousMessages() {
-      const historyContainer = document.getElementById('chat-history');
-      const dfMessenger = document.querySelector('df-messenger');
-
-      if (!historyContainer || !dfMessenger) return;
-
-      const entries = [...historyContainer.querySelectorAll('.chat-entry')]
-        .map(el => el.textContent.trim())
-        .filter(text => text.length > 0);
-
-      let index = 0;
-
-      function sendNext() {
-        if (index >= entries.length) return;
-
-        dfMessenger.sendQuery(entries[index]).then(() => {
-          index++;
-          setTimeout(sendNext, 600); // Delay for natural spacing
-        });
-      }
-
-      window.addEventListener('df-messenger-loaded', () => {
-        sendNext();
-      });
-    }
-
     document.addEventListener('DOMContentLoaded', () => {
       const modal = document.getElementById('suggestions-modal');
       if (modal) modal.style.transition = 'opacity 0.5s, visibility 0.5s, transform 0.5s cubic-bezier(0.4,0,0.2,1)';
-
+      
       setViewportHeight();
       window.addEventListener('resize', setViewportHeight);
       window.addEventListener('orientationchange', () => {
@@ -357,8 +331,6 @@
         }
         dfMessenger.removeEventListener('df-request-sent', handler);
       });
-
-      replayPreviousMessages();
     });
   </script>
 </body>
