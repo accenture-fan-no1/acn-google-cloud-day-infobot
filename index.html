@@ -332,6 +332,13 @@
         dfMessenger.removeEventListener('df-request-sent', handler);
       });
     });
+
+    document.addEventListener('df-messenger-loaded', function () {
+      const dfMessenger = document.querySelector('df-messenger');
+      if (dfMessenger && typeof dfMessenger.startNewSession === 'function') {
+        dfMessenger.startNewSession({ retainHistory: false });
+      }
+    });
   </script>
 </body>
 </html>
