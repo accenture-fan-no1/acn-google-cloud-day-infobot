@@ -28,9 +28,6 @@
         <div class="suggestion-chip" onclick="sendSuggestion('What are Accentures goals and aspirations for the future of the company, focus more on programs and possible projects that accenture may have for the companies future.', 'What are Accentures goals for the future?')">
           What are Accentures goals for the future?
         </div>
-        <div class="suggestion-chip" onclick="sendSuggestion('tell the user what questions you can answer, give them a very short list of possible topics.', 'What questions can I ask you?')">
-          What questions can I ask you?
-        </div>
       </div>
     </div>
   </div>
@@ -334,6 +331,13 @@
         }
         dfMessenger.removeEventListener('df-request-sent', handler);
       });
+    });
+
+    document.addEventListener('df-messenger-loaded', function () {
+      const dfMessenger = document.querySelector('df-messenger');
+      if (dfMessenger && typeof dfMessenger.startNewSession === 'function') {
+        dfMessenger.startNewSession({ retainHistory: false });
+      }
     });
   </script>
 </body>
