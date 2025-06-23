@@ -41,7 +41,8 @@
     project-id="acn-cloud-solution-factory"
     agent-id="4e8f264b-692a-4a72-a7b5-a817dbbb2ba7"
     language-code="en"
-    max-query-length="-1">
+    max-query-length="-1"
+    storage-option="none">
     <df-messenger-chat chat-title="Accenture_infobot"></df-messenger-chat>
   </df-messenger>
 
@@ -331,13 +332,6 @@
         }
         dfMessenger.removeEventListener('df-request-sent', handler);
       });
-    });
-
-    window.addEventListener('df-messenger-loaded', () => {
-      const dfMessenger = document.querySelector('df-messenger');
-      if (dfMessenger && typeof dfMessenger.clearStorage === 'function') {
-        dfMessenger.clearStorage();
-      }
     });
   </script>
 </body>
